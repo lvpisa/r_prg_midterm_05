@@ -1,0 +1,29 @@
+---
+title: "r_prg_midterm_05"
+author: "陳韋哲"
+date: "2017/2/9"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#*使用`%>%`改寫程式*
+```{r}
+load(url("https://storage.googleapis.com/r_rookies/straw_hat_df.RData"))
+
+library(magrittr)
+
+straw_hat_df$birth_date <- Sys.Date() %>%
+  format(format = "%Y") %>%
+  as.numeric() %>%
+  `-` (straw_hat_df$age) %>%
+  paste(straw_hat_df$birthday, sep = "-") %>%
+  as.Date()
+```
+
+#*驗證*
+```{r}
+straw_hat_df
+```
